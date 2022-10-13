@@ -1,5 +1,7 @@
 FROM osrf/ros:humble-desktop-full
 
+LABEL org.opencontainers.image.description "Docker based ROS 2 drone development environment"
+
 ARG USERNAME=dev
 ARG USER_UID=1000
 ARG USER_GID=${USER_UID}
