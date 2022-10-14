@@ -21,6 +21,11 @@ RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4
 
 RUN pip install -U pyros-genmsg
 
+
+RUN wget https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage -o /usr/bin/QGroundControl.AppImage && \
+    chmod +x /usr/bin/QGroundControl.AppImage && \
+    echo -e "#!/bin/sh\n$(pwd)/QGroundControl.AppImage --appimage-extract-and-run" > /usr/bin/QGroundControl
+
 # Create user
 RUN groupadd --gid ${USER_GID} ${USERNAME} && \
     useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} -s /bin/bash && \
@@ -41,10 +46,6 @@ RUN mkdir -p ~/px4_ros_com_ros2/src && \
 
 RUN git clone https://github.com/PX4/PX4-Autopilot.git --recursive && \
     bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
-
-RUN wget https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage && \
-    chmod +x QGroundControl.AppImage && \
-    echo -e "#!/bin/sh\n$(pwd)/QGroundControl.AppImage --appimage-extract-and-run" > /usr/bin/QGroundControl
 
 VOLUME [ "/tmp/.X11-unix" ]
 ENV DISPLAY=":0"
