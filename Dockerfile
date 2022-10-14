@@ -8,7 +8,7 @@ ARG USER_GID=${USER_UID}
 
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
-    apt install -y git sudo ssh python3-pip && \
+    apt install -y git sudo ssh python3-pip libgstreamer-gl1.0-0 && \
     apt clean
 
 RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4 Fast-RTPS-Gen && \
@@ -41,3 +41,10 @@ RUN mkdir -p ~/px4_ros_com_ros2/src && \
 
 RUN git clone https://github.com/PX4/PX4-Autopilot.git --recursive && \
     bash ./PX4-Autopilot/Tools/setup/ubuntu.sh
+
+RUN wget https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage && \
+    chmod +x QGroundControl.AppImage && \
+    echo -e "#!/bin/sh\n$(pwd)/QGroundControl.AppImage --appimage-extract-and-run" > /usr/bin/QGroundControl
+
+VOLUME [ "/tmp/.X11-unix" ]
+ENV DISPLAY=":0"
