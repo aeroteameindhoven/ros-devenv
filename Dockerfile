@@ -22,7 +22,7 @@ RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4
 RUN pip install -U pyros-genmsg
 
 
-RUN wget https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage -o /usr/bin/QGroundControl.AppImage && \
+RUN wget https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage -O /usr/bin/QGroundControl.AppImage --progress=dot && \
     chmod +x /usr/bin/QGroundControl.AppImage && \
     echo -e "#!/bin/sh\n$(pwd)/QGroundControl.AppImage --appimage-extract-and-run" > /usr/bin/QGroundControl
 
