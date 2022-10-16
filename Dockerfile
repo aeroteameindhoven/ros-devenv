@@ -24,9 +24,9 @@ RUN git clone --recursive https://github.com/eProsima/Fast-DDS-Gen.git -b v1.0.4
     rm -rf Fast-RTPS-Gen
 
 # Install QGroundControl (app image)
-RUN wget https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage -O /usr/bin/QGroundControl.AppImage --progress=dot && \
+RUN curl https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage -o /usr/bin/QGroundControl.AppImage && \
     echo "#!/bin/sh\n/usr/bin/QGroundControl.AppImage --appimage-extract-and-run" > /usr/bin/QGroundControl && \
-    chmod +x /usr/bin/QGroundControl{.AppImage,}
+    chmod +x /usr/bin/QGroundControl.AppImage /usr/bin/QGroundControl
 
 # Create user
 RUN groupadd --gid ${USER_GID} ${USERNAME} && \
