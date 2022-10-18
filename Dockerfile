@@ -9,7 +9,9 @@ ARG USER_GID=${USER_UID}
 # Install APT packages
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
-    apt install -y git curl sudo ssh python3-genmsg libgstreamer-gl1.0-0 libpulse-mainloop-glib0 && \
+    apt install -y git curl sudo ssh python3-genmsg libgstreamer-gl1.0-0 \
+                    libpulse-mainloop-glib0 ros-noetic-mavlink \
+                    libgl1-mesa-glx libgl1-mesa-dri && \
     apt clean
 
 # Install QGroundControl (app image)
