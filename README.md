@@ -1,10 +1,10 @@
-# Docker ROS2 Development Environment
+# Docker ROS Development Environment
 
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/aeroteameindhoven/ros2-devenv/main)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aeroteameindhoven/ros2-devenv/Docker)
-![License](https://img.shields.io/github/license/aeroteameindhoven/ros2-devenv)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/aeroteameindhoven/ros-devenv/main)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aeroteameindhoven/ros-devenv/Docker)
+![License](https://img.shields.io/github/license/aeroteameindhoven/ros-devenv)
 
-[View Container](https://github.com/aeroteameindhoven/ros2-devenv/pkgs/container/ros2-devenv)
+[View Container](https://github.com/aeroteameindhoven/ros-devenv/pkgs/container/ros-devenv)
 
 ## Usage
 
@@ -13,8 +13,20 @@ In the root of your project, add a file
 
 ```json
 {
-    "name": "ROS 2 Development Environment",
-    "image": "ghcr.io/aeroteameindhoven/ros2-devenv:main"
+    "name": "ROS Development Environment",
+    "image": "ghcr.io/aeroteameindhoven/ros-devenv:main",
+    
+    "containerEnv": {
+        // X11 Forwarding
+        "DISPLAY": "${localEnv:DISPLAY}"
+    },
+
+    "mounts": [
+        // X11 Forwarding
+        "source=/tmp/.X11-unix,target=/tmp/.X11-unix,type=bind",
+        // Intel GPU Forwarding
+        "source=/dev/dri,target=/dev/dri,type=bind"
+    ]
 }
 ```
 
