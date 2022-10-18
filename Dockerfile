@@ -10,8 +10,8 @@ ARG USER_GID=${USER_UID}
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
     apt install -y git curl sudo ssh python3-genmsg libgstreamer-gl1.0-0 \
-                    libpulse-mainloop-glib0 ros-noetic-mavlink \
-                    libgl1-mesa-glx libgl1-mesa-dri && \
+    libpulse-mainloop-glib0 ros-noetic-mavlink \
+    libgl1-mesa-glx libgl1-mesa-dri && \
     apt clean
 
 # Install QGroundControl (app image)
@@ -24,6 +24,10 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} && \
     echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > etc/sudoers.d/${USERNAME} && \
     chmod 0440 /etc/sudoers.d/${USERNAME} && \
     echo source /opt/ros/noetic/setup.bash >> /home/${USERNAME}/.bashrc
+
+# Setup px4 ease of use command before dropping into user
+RUN  echo "#!/bin/sh\ncd /home/${USERNAME}/PX4-Autopilot && make px4_sitl gazebo" > /usr/bin/px4-gazebo && \
+    chmod +x /usr/bin/px4-gazebo
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}

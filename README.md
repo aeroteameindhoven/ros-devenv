@@ -6,6 +6,11 @@
 
 [View Container](https://github.com/aeroteameindhoven/ros-devenv/pkgs/container/ros-devenv)
 
+## Provided helper commands
+
+-   `QGroundControl` - Extracts and runs QGroundControl
+-   `px4-gazebo` - Builds and runs px4 gazebo
+
 ## Usage
 
 In the root of your project, add a file
@@ -15,7 +20,7 @@ In the root of your project, add a file
 {
     "name": "ROS Development Environment",
     "image": "ghcr.io/aeroteameindhoven/ros-devenv:main",
-    
+
     "containerEnv": {
         // X11 Forwarding
         "DISPLAY": "${localEnv:DISPLAY}"
