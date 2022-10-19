@@ -16,7 +16,7 @@
 In the root of your project, add a file
 `.devcontainer/devcontainer.json` with the contents:
 
-```json
+```jsonc
 {
     "name": "ROS Development Environment",
     "image": "ghcr.io/aeroteameindhoven/ros-devenv:main",
