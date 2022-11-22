@@ -9,10 +9,17 @@ ARG USER_GID=${USER_UID}
 # Install APT packages
 RUN export DEBIAN_FRONTEND=noninteractive && \
     apt update && \
-    apt install -y git curl sudo ssh python3-genmsg libgstreamer-gl1.0-0 \
-    libpulse-mainloop-glib0 ros-noetic-mavlink \
+    apt install -y git curl sudo ssh python3-genmsg \
+    libgstreamer-gl1.0-0 libpulse-mainloop-glib0\
+    ros-noetic-mavlink ros-noetic-mavros ros-noetic-mavros-extras \
     libgl1-mesa-glx libgl1-mesa-dri && \
     apt clean
+
+# Install GeographicLib datasets
+RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && \
+    chmod +x install_geographiclib_datasets.sh && \
+    ./install_geographiclib_datasets.sh && \
+    rm install_geographiclib_datasets.sh
 
 # Install QGroundControl (app image)
 RUN curl https://d176tv9ibo4jno.cloudfront.net/builds/master/QGroundControl.AppImage -o /usr/bin/QGroundControl.AppImage && \
