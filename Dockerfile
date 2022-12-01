@@ -33,13 +33,18 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} && \
     echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > etc/sudoers.d/${USERNAME} && \
     chmod 0440 /etc/sudoers.d/${USERNAME} && \
     echo source /opt/ros/noetic/setup.bash >> /home/${USERNAME}/.bashrc
-    # source px4 firmware and ros workspace
-    echo source ~/workspace/drone/ros_ws/devel/setup.bash >> /home/${USERNAME}/.bashrc
-    echo px4="~/PX4-Autopilot" >> /home/${USERNAME}/.bashrc
-    echo source ~/PX4-Autopilot/Tools/simulation/gazebo/setup_gazebo.bash $px4 $px4/build/px4_sitl_default >> /home/${USERNAME}/.bashrc
-    echo export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot >> /home/${USERNAME}/.bashrc
+
+# source px4 firmware and ros workspace
+RUN echo source ~/workspace/drone/ros_ws/devel/setup.bash >> /home/${USERNAME}/.bashrc && \
+    echo px4="~/PX4-Autopilot" >> /home/${USERNAME}/.bashrc && \
+    echo source ~/PX4-Autopilot/Tools/simulation/gazebo/setup_gazebo.bash $px4 $px4/build/px4_sitl_default >> /home/${USERNAME}/.bashrc && \
+    echo export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot >> /home/${USERNAME}/.bashrc && \
     echo export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo >> /home/${USERNAME}/.bashrc
 
+
+# Setup px4 ease of use command before dropping into user
+# RUN  echo "#!/bin/sh\ncd /home/${USERNAME}/PX4-Autopilot && make px4_sitl gazebo" > /usr/bin/px4-gazebo && \
+#      chmod +x /usr/bin/px4-gazebo
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
