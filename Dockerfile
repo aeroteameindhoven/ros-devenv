@@ -15,6 +15,7 @@ RUN export DEBIAN_FRONTEND=noninteractive && \
     libgl1-mesa-glx libgl1-mesa-dri python3-catkin-tools && \
     apt clean
 
+
 # Install GeographicLib datasets
 RUN wget https://raw.githubusercontent.com/mavlink/mavros/master/mavros/scripts/install_geographiclib_datasets.sh && \
     chmod +x install_geographiclib_datasets.sh && \
@@ -32,6 +33,13 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} && \
     echo ${USERNAME} ALL=\(root\) NOPASSWD:ALL > etc/sudoers.d/${USERNAME} && \
     chmod 0440 /etc/sudoers.d/${USERNAME} && \
     echo source /opt/ros/noetic/setup.bash >> /home/${USERNAME}/.bashrc
+    # source px4 firmware and ros workspace
+    echo source ~/workspace/drone/ros_ws/devel/setup.bash >> /home/${USERNAME}/.bashrc
+    echo px4="~/PX4-Autopilot" >> /home/${USERNAME}/.bashrc
+    echo source ~/PX4-Autopilot/Tools/simulation/gazebo/setup_gazebo.bash $px4 $px4/build/px4_sitl_default >> /home/${USERNAME}/.bashrc
+    echo export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot >> /home/${USERNAME}/.bashrc
+    echo export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:~/PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo >> /home/${USERNAME}/.bashrc
+
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}
