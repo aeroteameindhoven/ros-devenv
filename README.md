@@ -39,4 +39,4 @@ for you to develop in
 
 ## Contributing Changes
 
-![Video demonstrating how to correctly create a new branch for a PR](.github/how-to-pr-branch.mp4)
+![Video demonstrating how to correctly create a new branch for a PR](.github/how-to-pr-branch.gif)
