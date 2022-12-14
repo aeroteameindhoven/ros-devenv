@@ -6,10 +6,9 @@
 
 [View Container](https://github.com/aeroteameindhoven/ros-devenv/pkgs/container/ros-devenv)
 
-## Provided helper commands
+## Useful Commands
 
 -   `QGroundControl` - Extracts and runs QGroundControl
--   `px4-gazebo` - Builds and runs px4 gazebo
 
 ## Usage
 
@@ -37,3 +36,7 @@ In the root of your project, add a file
 
 This will pull the latest build of this docker image from github container registry
 for you to develop in
+
+## Contributing Changes
+
+![Video demonstrating how to correctly create a new branch for a PR](.github/how-to-pr-branch.webm)
