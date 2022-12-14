@@ -40,10 +40,12 @@ WORKDIR /home/${USERNAME}
 RUN git clone https://github.com/PX4/PX4-Autopilot.git --recursive && \
     bash ./PX4-Autopilot/Tools/setup/ubuntu.sh && \
     # Pre-build the firmware
-    cd ./PX4-Autopilot && make px4_sitl sitl_gazebo
+    cd ./PX4-Autopilot && DONT_RUN=1 make px4_sitl_default gazebo
 
 # Setup px4 and ros workspace
 RUN PX4="/home/${USERNAME}/PX4-Autopilot" && \
     echo "source ~/workspace/drone/ros_ws/devel/setup.bash" >> ~/.bashrc && \
     echo "source $PX4/Tools/simulation/gazebo/setup_gazebo.bash $PX4 $PX4/build/px4_sitl_default" >> ~/.bashrc && \
-    echo export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:$PX4:"$PX4/Tools/simulation/gazebo/sitl_gazebo" >> ~/.bashrc
+    echo "export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/dev/PX4-Autopilot" >> ~/.bashrc && \
+    echo "export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/home/dev/PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo" >> ~/.bashrc
+
