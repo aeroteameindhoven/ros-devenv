@@ -1,9 +1,5 @@
 name: Docker
 
-concurrency: 
-  group: docker
-  cancel-in-progress: true
-
 # This workflow uses actions that are not certified by GitHub.
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
@@ -16,6 +12,10 @@ on:
     tags: [ 'v*.*.*' ]
   pull_request:
     branches: [ "main" ]
+    
+concurrency: 
+      group: docker-${{github.head_ref}}
+      cancel-in-progress: true
 
 env:
   # Use docker.io for Docker Hub if empty
@@ -26,7 +26,6 @@ env:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
