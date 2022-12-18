@@ -1,7 +1,7 @@
 # Docker ROS Development Environment
 
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/aeroteameindhoven/ros-devenv/main)
-![GitHub Workflow Status](https://img.shields.io/github/workflow/status/aeroteameindhoven/ros-devenv/Docker)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/aeroteameindhoven/ros-devenv/docker-publish.yml?branch=main)
 ![License](https://img.shields.io/github/license/aeroteameindhoven/ros-devenv)
 
 [View Container](https://github.com/aeroteameindhoven/ros-devenv/pkgs/container/ros-devenv)
