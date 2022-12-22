@@ -43,9 +43,10 @@ RUN git clone https://github.com/PX4/PX4-Autopilot.git --recursive && \
     cd ./PX4-Autopilot && DONT_RUN=1 make px4_sitl_default gazebo
 
 # Setup px4 and ros workspace
-RUN PX4="/home/${USERNAME}/PX4-Autopilot" && \
-    echo "source ~/workspace/drone/ros_ws/devel/setup.bash" >> ~/.bashrc && \
-    echo "source $PX4/Tools/simulation/gazebo/setup_gazebo.bash $PX4 $PX4/build/px4_sitl_default" >> ~/.bashrc && \
-    echo "export ROS_PACKAGE_PATH=:$ROS_PACKAGE_PATH:/home/dev/PX4-Autopilot:/home/dev/PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo" >> ~/.bashrc && \
-    echo "export ROS_PACKAGE_PATH=:$ROS_PACKAGE_PATH:/home/dev/PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo" >> ~/.bashrc
+RUN echo "\n# Gazebo and PX4 configuration (edit in Dockerfile)\n\
+PX4_PATH='/home/${USERNAME}/PX4-Autopilot'\n\
+source /home/${USERNAME}/workspace/drone/ros_ws/devel/setup.bash\n\
+source \$PX4_PATH/Tools/simulation/gazebo/setup_gazebo.bash \$PX4_PATH \$PX4_PATH/build/px4_sitl_default\n\
+export ROS_PACKAGE_PATH=:\$ROS_PACKAGE_PATH:/home/dev/PX4-Autopilot:/home/${USERNAME}/PX4-Autopilot/Tools/simulation/gazebo/sitl_gazebo\n\
+" >> ~/.bashrc
 
