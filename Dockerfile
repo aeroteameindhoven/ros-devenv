@@ -37,10 +37,13 @@ USER ${USERNAME}
 WORKDIR /home/${USERNAME}
 
 # Download and setup px4 firmware
-RUN git clone https://github.com/PX4/PX4-Autopilot.git --recursive && \
-    bash ./PX4-Autopilot/Tools/setup/ubuntu.sh && \
+RUN git clone -n https://github.com/PX4/PX4-Autopilot.git --recursive && \
+    cd ./PX4-Autopilot && \
+    # Pin to known working commit
+    git checkout 5217bedd4b636eba61b55a85a8b3cb61d6b69857 && \
+    bash ./Tools/setup/ubuntu.sh && \
     # Pre-build the firmware
-    cd ./PX4-Autopilot && DONT_RUN=1 make px4_sitl_default gazebo
+    DONT_RUN=1 make px4_sitl_default gazebo
 
 # Setup px4 and ros workspace
 COPY .ros.bashrc .
