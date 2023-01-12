@@ -47,4 +47,4 @@ RUN git clone -n https://github.com/PX4/PX4-Autopilot.git --recursive && \
 
 # Setup px4 and ros workspace
 COPY .ros.bashrc .
-RUN echo "source .ros.bashrc" >> ~/.bashrc
+RUN echo "source ~/.ros.bashrc" >> ~/.bashrc

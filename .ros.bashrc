@@ -1,6 +1,6 @@
 # Gazebo and PX4 configuration (edit in Dockerfile)
-PX4_PATH="/home/${USERNAME}/PX4-Autopilot"
 USERNAME="dev"
+PX4_PATH="/home/${USERNAME}/PX4-Autopilot"
 
 set -euo pipefail
 
