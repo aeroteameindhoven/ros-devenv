@@ -46,5 +46,5 @@ RUN git clone -n https://github.com/PX4/PX4-Autopilot.git --recursive && \
     DONT_RUN=1 make px4_sitl_default gazebo
 
 # Setup px4 and ros workspace
-COPY .ros.bashrc .
+COPY --chown=${USERNAME}:${USERNAME} .ros.bashrc .
 RUN echo "source ~/.ros.bashrc" >> ~/.bashrc
